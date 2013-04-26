@@ -13,33 +13,35 @@ Step to integrate the module with your project:
 		a. If you are using the GUI interface add the module on the right side window.
 		b. If you are using the xml file, add the below lines to your tiapp.xml.
 ```
-			<modules>
-        			<module platform="iphone" version="1.0">com.midhun.sms</module>
-    			</modules>
+<modules>
+   <module platform="iphone" version="1.0">com.midhun.sms</module>
+</modules>
 ```
 
 #####Create the message composer:
 ```
-	var smsModule = require('com.midhun.sms');
-        var smsDialog = smsModule.createMessage({
-   		receivers: ['+91 9846389231'],
-    		messageBody: 'Hi Midhun',
-    		barColor: 'black'});
-    	if(smsDialog.isSupported())
+var smsModule = require('com.midhun.sms');
+var smsDialog = smsModule.createMessage({
+   receivers: ['+91 9846389231'],
+   messageBody: 'Hi Midhun',
+   barColor: 'black'
+});
+   
+if(smsDialog.isSupported())
+{
+    smsDialog.open({animated: true});
+    smsDialog.addEventListener('complete',function(e){
+    	if(e.result == smsDialog.SENT)
     	{
-    		smsDialog.open({animated: true});
-    		smsDialog.addEventListener('complete',function(e){
-        		if(e.result == smsDialog.SENT)
-        		{
-        			var successAlert = Ti.UI.createAlertDialog({
-        				title : 'Message Sent',
-        				message : 'Hurray',
-        				buttonNames : ['OK']
-        			});
-        			successAlert.show();
-	        	}
+        	var successAlert = Ti.UI.createAlertDialog({
+        		title : 'Message Sent',
+        		message : 'Hurray',
+        		buttonNames : ['OK']
         	});
-       }
+        	successAlert.show();
+    	}
+   });
+}
 
 ```
 
