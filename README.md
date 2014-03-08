@@ -49,4 +49,3 @@ For Further Details Contact:
 
 	Midhun M P
 	Email : midhunmp7@gmail.com
-	Mobile: +91 9846389231
